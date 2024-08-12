@@ -1,9 +1,8 @@
 import { useLocation } from "react-router";
 
-const Header = () => {
+const Header:React.FC = () => {
     const location = useLocation();
   
-    // Determine the header title based on the current route
     const getHeaderTitle = () => {
       switch (location.pathname) {
         case '/':
@@ -16,9 +15,10 @@ const Header = () => {
     };
 
     return ( 
-    <header className="w-full h-16 bg-[#228] p-4 text-white">
-        <h2 className="text-2xl font-bold text-center">{getHeaderTitle()}</h2>
-        </header>)
+        <header className="w-full h-16 bg-[#3E418D] p-4 font-bold text-white text-3xl">
+            <h2 className="text-2xl font-bold text-center">{getHeaderTitle()}</h2>
+        </header>
+    )
 }
 
 export default Header

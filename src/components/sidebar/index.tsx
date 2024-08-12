@@ -12,7 +12,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
   return (
     <>
       <aside
-        className={`fixed top-0 left-0 min-h-screen bg-[#228] pt-4 ${
+        className={`fixed top-0 left-0 min-h-screen bg-[#3E418D] pt-4 ${
           isOpen ? 'w-58' : 'w-0'
         } md:w-58 transition-all duration-300 overflow-hidden md:static md:h-full`}
       >
@@ -20,8 +20,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `flex items-center p-3 rounded-md transition transform hover:scale-105 ${
-                isActive ? 'bg-[#44B] border-b-2 border-white' : 'hover:bg-[#114]'
+              `flex items-center p-3 rounded-md transition transform hover:scale-105 font-bold text-white text-1xl ${
+                isActive ? 'bg-[#44B] border-b-2 border-white' : 'hover:bg-[#44B]'
               }`
             }
           >
@@ -31,8 +31,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
           <NavLink
             to="/charts-maps"
             className={({ isActive }) =>
-              `flex items-center p-3 rounded-md transition transform hover:scale-105 ${
-                isActive ? 'bg-[#44B] border-b-2 border-white' : 'hover:bg-[#114]'
+              `flex items-center p-3 rounded-md transition transform hover:scale-105 font-bold text-white text-1xl ${
+                isActive ? 'bg-[#44B] border-b-2 border-white' : 'hover:bg-[#44B]'
               }`
             }
           >
@@ -43,7 +43,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
       </aside>
       {/* Mobile Toggle Button */}
       <button
-        className="fixed top-4 left-4 md:hidden p-2 bg-[#228] text-white rounded-full"
+        className="fixed top-4 left-4 md:hidden p-2 bg-[#44B] rounded-full font-bold text-white text-2xl"
         onClick={toggleSidebar}
       >
         ☰
