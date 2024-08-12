@@ -1,11 +1,11 @@
-import React from 'react';
-import { FaAddressBook, FaChartLine } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
+import React from 'react'
+import { FaAddressBook, FaChartLine } from 'react-icons/fa'
+import { NavLink } from 'react-router-dom'
 
 // Define the type for the props
 interface SidebarProps {
-  isOpen: boolean;
-  toggleSidebar: () => void;
+  isOpen: boolean
+  toggleSidebar: () => void
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
@@ -21,7 +21,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
             to="/"
             className={({ isActive }) =>
               `flex items-center p-3 rounded-md transition transform hover:scale-105 font-bold text-white text-1xl ${
-                isActive ? 'bg-[#44B] border-b-2 border-white' : 'hover:bg-[#44B]'
+                isActive
+                  ? 'bg-[#44B] border-b-2 border-white'
+                  : 'hover:bg-[#44B]'
               }`
             }
           >
@@ -32,7 +34,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
             to="/charts-maps"
             className={({ isActive }) =>
               `flex items-center p-3 rounded-md transition transform hover:scale-105 font-bold text-white text-1xl ${
-                isActive ? 'bg-[#44B] border-b-2 border-white' : 'hover:bg-[#44B]'
+                isActive
+                  ? 'bg-[#44B] border-b-2 border-white'
+                  : 'hover:bg-[#44B]'
               }`
             }
           >
@@ -49,7 +53,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
         ☰
       </button>
     </>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar
