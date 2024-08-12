@@ -40,8 +40,7 @@ const Home: React.FC<HomeProps> = ({children}) => {
       <div className="flex-1 flex flex-col">
         <Header />
         <main className="flex-1 p-4">
-          <div className="fade-in">
-            <Outlet />
+          <div className="fade-in h-full">
             {children}
           </div>
         </main>
