@@ -1,32 +1,33 @@
-import { useSelector } from "react-redux";
-import Home from "./Home";
-import { selectContacts } from "../store/slices/contactsSlice";
-import { RootState } from "../store/store";
-import { useState } from "react";
-import { MdCancel } from "react-icons/md";
-import ContactDetails from "../components/contact/ContactDetails";
-import ContactForm from "../components/contact/ContactForm";
+import { useSelector } from 'react-redux'
+import Home from './Home'
+import { selectContacts } from '../store/slices/contactsSlice'
+import { RootState } from '../store/store'
+import { useState } from 'react'
+import { MdCancel } from 'react-icons/md'
+import ContactDetails from '../components/contact/ContactDetails'
+import ContactForm from '../components/contact/ContactForm'
 
 const Contact: React.FC = () => {
-  const contacts = useSelector((state: RootState) => selectContacts(state));
+  const contacts = useSelector((state: RootState) => selectContacts(state))
 
-  const [isAdding, setIsAdding] = useState<boolean>(false);
-  const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [contactId, setContactId] = useState<number | null> (null);
-  const [showNoContactsModal, setShowNoContactsModal] = useState<boolean>(true);
+  const [isAdding, setIsAdding] = useState<boolean>(false)
+  const [isEditing, setIsEditing] = useState<boolean>(false)
+  const [contactId, setContactId] = useState<number | null>(null)
+  const [showNoContactsModal, setShowNoContactsModal] = useState<boolean>(true)
 
   const handleNoContactsModal = () => {
-    setShowNoContactsModal(!showNoContactsModal);
-  };
+    setShowNoContactsModal(!showNoContactsModal)
+  }
 
   const handleSave = () => {
-    setIsAdding(false); setIsEditing(false)
+    setIsAdding(false)
+    setIsEditing(false)
   }
 
   return (
     <Home>
-        {/* Button to create a new contact */}
-        {!isAdding && !isEditing && (
+      {/* Button to create a new contact */}
+      {!isAdding && !isEditing && (
         <div className="flex justify-center mt-10 mb-10">
           <button
             onClick={() => setIsAdding(true)}
@@ -37,16 +38,25 @@ const Contact: React.FC = () => {
         </div>
       )}
 
-      {/* Display the contact details, if there are contacts */}  
-      {contacts.length !== 0 && !isEditing && !isAdding && <ContactDetails handleEditing = {(id)=> {
-        setIsEditing(true);
-        setContactId(id);
-      }}
-      handleSave={handleSave}
-      />}
+      {/* Display the contact details, if there are contacts */}
+      {contacts.length !== 0 && !isEditing && !isAdding && (
+        <ContactDetails
+          handleEditing={(id) => {
+            setIsEditing(true)
+            setContactId(id)
+          }}
+          handleSave={handleSave}
+        />
+      )}
 
-      {/* Display the contact form to add/ update the contact */}  
-      {(isAdding || isEditing) &&  <ContactForm canEdit = {isEditing} handleSave={handleSave} contactId={contactId}/>}
+      {/* Display the contact form to add/ update the contact */}
+      {(isAdding || isEditing) && (
+        <ContactForm
+          canEdit={isEditing}
+          handleSave={handleSave}
+          contactId={contactId}
+        />
+      )}
 
       {/* Display the modal if there are no contacts */}
       {contacts.length === 0 && showNoContactsModal && (
@@ -62,11 +72,13 @@ const Contact: React.FC = () => {
             {/* Modal Content */}
             <div className="pt-4">
               <h2 className="text-lg font-bold mb-4">No Contacts Found</h2>
-              <p className="mb-4">We don't have any contacts. Please add new contacts.</p>
+              <p className="mb-4">
+                We don't have any contacts. Please add new contacts.
+              </p>
               <button
-                onClick={()=> {
-                    setIsAdding(true);
-                    handleNoContactsModal();
+                onClick={() => {
+                  setIsAdding(true)
+                  handleNoContactsModal()
                 }}
                 className="block mt-4 mx-auto py-2 px-4 bg-blue-600 text-white rounded"
               >
@@ -77,7 +89,7 @@ const Contact: React.FC = () => {
         </div>
       )}
     </Home>
-  );
-};
+  )
+}
 
-export default Contact;
+export default Contact
