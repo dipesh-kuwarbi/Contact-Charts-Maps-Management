@@ -53,7 +53,6 @@ Ensure you have the following installed:
 
    ```bash
    git clone <your-repo-url>
-   cd contact-management-app
    ```
 
 2. **Install the dependencies:**
