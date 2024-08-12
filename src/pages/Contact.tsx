@@ -1,6 +1,11 @@
+import Home from "./Home"
 
-const Contact = ()=> {
-    return <div></div>
+const Contact: React.FC =()=> {
+return (
+    <Home >
+        <div></div>
+    </Home>
+)
 }
 
 export default Contact
