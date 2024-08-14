@@ -88,7 +88,7 @@ const ChartsAndMaps: React.FC = () => {
   return (
     <Home>
       <Loader  isLoading = {activeTab === 'map' ?  isCountryLoading : isGraphLoading}/>
-      <div className="flex flex-col max-h-[85vh] justify-between p-4 overflow-y-auto">
+      <div className="flex flex-col max-h-[85vh] justify-between overflow-y-auto">
         <div>
           <button
             className={`py-2 px-4 ${activeTab === 'chart' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'} rounded-l-lg`}
@@ -103,8 +103,10 @@ const ChartsAndMaps: React.FC = () => {
             Map
           </button>
 
+          <h2 className="text-2xl font-bold text-center text-gray-500">{activeTab === 'map' ? "Geospatial data related to COVID-19." : "Graphical Representation of COVID-19 Cases."}</h2>
+
           {activeTab === 'map' && (
-            <div className="mt-4 bg-gray-500 rounded-lg shadow-xl">
+            <div className="bg-gray-500 rounded-lg shadow-xl">
               <MapContainer
                 center={[20, 0]}
                 zoom={2}
