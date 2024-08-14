@@ -87,7 +87,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
         </h2>
       </div>
       <div className="flex justify-center">
-        <div className="bg-[#3E418D] p-8 rounded-lg shadow-lg hover:shadow-xl w-full max-w-lg transition-shadow duration-300">
+        <div className="bg-[#3E418D] p-8 rounded-lg shadow-xl hover:shadow-2xl w-full max-w-lg transition-shadow duration-300">
           <form onSubmit={handleSubmit}>
             <div className="mt-4 flex items-center">
               <label

@@ -48,7 +48,7 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({
         {contacts.map((details) => (
           <div
             key={details.id}
-            className="bg-[#3E418D] p-6 rounded-lg shadow-lg flex flex-col justify-between border border-gray-300"
+            className="bg-[#3E418D] p-6 rounded-lg shadow-xl flex flex-col justify-between border border-gray-300"
           >
             <div>
               <p className="font-bold text-2xl mb-4">
