@@ -9,12 +9,15 @@ import {
   CategoryScale,
   LinearScale,
   PointElement,
+  Tooltip,
+  Legend,
 } from 'chart.js'
 import { useCountryData, useGlobalData, useGraphData } from '../store/hooks'
 import Home from './Home'
 import { icon } from 'leaflet'
+import Loader from '../components/common/Loader'
 
-ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement)
+ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend)
 
 const ChartsAndMaps: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'chart' | 'map'>('map')
@@ -23,45 +26,38 @@ const ChartsAndMaps: React.FC = () => {
   const { data: countryData, isLoading: isCountryLoading } = useCountryData()
   const { data: graphData, isLoading: isGraphLoading } = useGraphData()
 
-  if (!globalData || isGlobalLoading || isCountryLoading || isGraphLoading)
-    return <div>Loading...</div>
-
   const chartData = {
     labels: Object.keys(graphData?.cases || {}),
     datasets: [
       {
-        label: 'Cases',
-        data: Object.values(graphData?.cases || {}),
-        borderColor: 'rgba(75, 192, 192, 1)',
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        pointBackgroundColor: 'rgba(75, 192, 192, 1)',
-        pointBorderColor: '#fff',
-        pointBorderWidth: 2,
-        pointRadius: 5,
-        borderWidth: 2,
-        tension: 0.4,
+        label: "Deaths",
+        data:  Object.values(graphData?.deaths || {}),
+        backgroundColor: "#FF5C5C",
+        borderColor: "#FF5C5C",
+        pointBorderColor: "#FF5C5C",
       },
+      {
+        label: "Cases",
+        data:  Object.values(graphData?.cases || {}),
+        backgroundColor: "#5C5CFF",
+        borderColor: "#5C5CFF",
+        pointBorderColor: "#5C5CFF",
+      },
+      {
+        label: "Recovered",
+        data: Object.values(graphData?.recovered || {}),
+        backgroundColor: "#8AFF8A",
+        borderColor: "#8AFF8A",
+        pointBorderColor: "#8AFF8A",
+      }
     ],
   }
 
   const chartOptions = {
     responsive: true,
     plugins: {
-      tooltip: {
-        callbacks: {
-          label: (tooltipItem: any) => `Cases: ${tooltipItem.raw}`,
-        },
-        backgroundColor: '#333',
-        titleColor: '#fff',
-        bodyColor: '#fff',
-        borderColor: 'rgba(75, 192, 192, 0.8)',
-        borderWidth: 1,
-      },
       legend: {
         display: true,
-        labels: {
-          color: '#333',
-        },
       },
     },
     scales: {
@@ -91,6 +87,7 @@ const ChartsAndMaps: React.FC = () => {
 
   return (
     <Home>
+      <Loader  isLoading = {activeTab === 'map' ?  isCountryLoading : isGraphLoading}/>
       <div className="flex flex-col max-h-[85vh] justify-between p-4 overflow-y-auto">
         <div>
           <button
@@ -107,7 +104,7 @@ const ChartsAndMaps: React.FC = () => {
           </button>
 
           {activeTab === 'map' && (
-            <div className="mt-8">
+            <div className="mt-4 bg-gray-500 rounded-lg shadow-xl">
               <MapContainer
                 center={[20, 0]}
                 zoom={2}
@@ -119,7 +116,7 @@ const ChartsAndMaps: React.FC = () => {
                 />
                 {countryData?.map((country) => (
                   <Marker
-                    key={country.countryInfo.iso2}
+                    key={country.countryInfo.iso2 + country.countryInfo.lat}
                     icon={ICON}
                     position={[
                       country.countryInfo.lat,
@@ -127,18 +124,18 @@ const ChartsAndMaps: React.FC = () => {
                     ]}
                   >
                     <Popup>
-                      <div>
-                        <h3 className="font-bold">{country.country}</h3>
-                        <p>
-                          <strong>Active:</strong> {country.active}
-                        </p>
-                        <p>
-                          <strong>Recovered:</strong> {country.recovered}
-                        </p>
-                        <p>
-                          <strong>Deaths:</strong> {country.deaths}
-                        </p>
-                      </div>
+                      <p className="text-xl font-bold capitalize">{country.country}</p>
+                        <ul>
+                          <li className="font-semibold text-blue-400">
+                            Active: {country.active}
+                          </li>
+                          <li className="font-semibold text-red-400">
+                            Deaths: {country.deaths}
+                          </li>
+                          <li className="font-semibold text-green-500">
+                            Recovered: {country.recovered}
+                          </li>
+                        </ul>
                     </Popup>
                   </Marker>
                 ))}
@@ -147,7 +144,7 @@ const ChartsAndMaps: React.FC = () => {
           )}
         </div>
         {activeTab === 'chart' && (
-          <div className="mt-8 max-h-[70vh]">
+          <div className="mt-8 max-h-[70vh] bg-gray-200 rounded-lg shadow-xl">
             <Line data={chartData} options={chartOptions} />
           </div>
         )}
